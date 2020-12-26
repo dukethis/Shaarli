@@ -79,8 +79,8 @@ if (get_magic_quotes_gpc())
     $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
 }
 
-// Prevent caching on client side or proxy: (yes, it's ugly)
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+// Load the last change time in 'Last-Modified' header
+header("Last-Modified: " . date("D, d M Y H:i:s", filectime("data/datastore.php")) . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
